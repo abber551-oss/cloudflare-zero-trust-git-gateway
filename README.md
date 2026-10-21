@@ -87,6 +87,9 @@ To satisfy forensic integrity and non-repudiation requirements, `schema_v2.sql` 
 
 $$\text{event-hash}_i = \text{SHA256}\left(\text{event-hash}_{i-1} \parallel \text{payload-hash}_i \parallel \text{agent-id}_i \parallel \text{timestamp}_i\right)$$
 
+- **Genesis Anchor:** The initial sequence (`seq_id = 1`) binds to a 64-byte zeroed genesis hash (`0000...0000`).
+- **Tamper Detection (`GET /api/v1/ledger/verify`):** Recomputes every row's digest chronologically from `seq_id = 1` to $N$. Any retroactive modification or row deletion invalidates all downstream hashes and immediately returns `HTTP 409 Conflict` with the exact `tampered_seq_id`.
+
 
 ---
 
