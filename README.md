@@ -83,7 +83,7 @@ An adversarial audit of initial v1.0 edge-gateway patterns identified five criti
 
 ## 4. Cryptographic Chain-of-Custody Specification
 
-To satisfy forensic integrity and non-To satisfy forensic integrity and non-repudiation requirements, `schema_v2.sql` enforces SQLite `STRICT` typing and links every event row $i$ to row $i-1$ via a deterministic SHA-256 digest serialized by the `LedgerSequencer` Durable Object:
+To satisfy forensic integrity and non-repudiation requirements, `schema_v2.sql` enforces SQLite `STRICT` typing and links every event row $i$ to row $i-1$ via a deterministic SHA-256 digest serialized by the `LedgerSequencer` Durable Object:
 
 $$\text{event-hash}_i = \text{SHA256}\left(\text{event-hash}_{i-1} \parallel \text{payload-hash}_i \parallel \text{agent-id}_i \parallel \text{timestamp}_i\right)$$
 
