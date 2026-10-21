@@ -1,9 +1,9 @@
-query DetectRogueAgentSwarms($accountTag: string!, $start: string!,$end: string!) {
+query DetectRogueAgentSwarms($accountTag: String!, $start: String!, $end: String!) {
   viewer {
     accounts(filter: { accountTag: $accountTag }) {
       artifactsEventsAdaptiveGroups(
         limit: 100
-        filter: { datetime_geq: $start, datetime_leq:$end }
+        filter: { datetime_geq: $start, datetime_leq: $end }
         orderBy: [sum_count_DESC]
       ) {
         dimensions {
@@ -18,12 +18,12 @@ query DetectRogueAgentSwarms($accountTag: string!, $start: string!,$end: string!
   }
 }
 
-query DetectPayloadAnomalies($accountTag: string!, $start: string!,$end: string!) {
+query DetectPayloadAnomalies($accountTag: String!, $start: String!, $end: String!) {
   viewer {
     accounts(filter: { accountTag: $accountTag }) {
       artifactsEventsAdaptiveGroups(
         limit: 100
-        filter: { datetime_geq: $start, datetime_leq:$end, eventKind: "action" }
+        filter: { datetime_geq: $start, datetime_leq: $end, eventKind: "action" }
         orderBy: [quantiles_durationMsP99_DESC]
       ) {
         dimensions {

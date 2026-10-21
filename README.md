@@ -85,7 +85,7 @@ An adversarial audit of initial v1.0 edge-gateway patterns identified five criti
 
 To satisfy forensic integrity and non-repudiation requirements, `schema_v2.sql` enforces SQLite `STRICT` typing and links every event row $i$ to row $i-1$ via a deterministic SHA-256 digest serialized by the `LedgerSequencer` Durable Object:
 
-$$\text{event\_hash}_i = \text{SHA256}\left(\text{event\_hash}_{i-1} \parallel \text{payload\_hash}_i \parallel \text{agent\_id}_i \parallel \text{timestamp}_i\right)$$
+$$\text{event-hash}_i = \text{SHA256}\left(\text{event-hash}_{i-1} \parallel \text{payload-hash}_i \parallel \text{agent-id}_i \parallel \text{timestamp}_i\right)$$
 
 * **Genesis Anchor:** The initial sequence (`seq_id = 1`) binds to a 64-byte zeroed genesis hash (`0000...0000`).
 * **Tamper Detection (`GET /api/v1/ledger/verify`):** Recomputes every row's digest chronologically from `seq_id = 1` to $N$. Any retroactive modification or row deletion invalidates all downstream hashes and immediately returns `HTTP 409 Conflict` with the exact `tampered_seq_id`.
